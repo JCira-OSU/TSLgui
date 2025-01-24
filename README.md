@@ -31,7 +31,14 @@ either from your distribution's repositories or with pip
 5. Click 'Generate!'
 6. Your specs will be written to `./data/specs.txt` before being passed to the
    specified binary from step 1. The output of TSLgenerator will then be written
-   to `./data/specs.tsl.txt` and appear in the right column.
+   to `./data/specs.tsl.txt` and then appear in the right column.
+
+All stdout from TSLgenerator will be captured and displayed in
+the in-window console, including all errors.
+
+Your most recent input file, output file, and binary path will be
+remembered and restored upon relaunching `TSLgui.py`! As stated above, this
+data is kept in `./data/`
 
 > [!TIP]
 > After you input your binary path, you can also click 'Show Manpage' to
