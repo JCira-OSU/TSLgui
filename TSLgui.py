@@ -53,7 +53,7 @@ class GUI:
         self.inputText.grid(row=1, column=0)
         self.outputText = tk.Text(self.root, height="300")
         self.outputText.grid(row=1, column=1)
-        self.consoleText = tk.Text(self.root, height="55", width=600)
+        self.consoleText = tk.Text(self.root, height="60", width=600)
         self.consoleText.grid(row=2, column=0, columnspan=2)
 
         self.root.grid_columnconfigure(0, weight=1)
@@ -203,9 +203,10 @@ class GUI:
         self.consoleText.insert(tk.END, "\nFinished writing.")
         self.consoleText.see(tk.END)
 
-        # Run TSLgenerator
+        # Run TSLgenerator and log to console
         command = [self._bin, self._input, "-o", self._output]
-        subprocess.run(command, capture_output=True, text=True)
+        result = subprocess.run(command, capture_output=True, text=True)
+        self.consoleText.insert(tk.END, result.stdout)
 
         # Open TSLgenerator output file
         try:
