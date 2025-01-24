@@ -10,10 +10,11 @@ class GUI:
     """Main GUI window for TSLgui"""
 
     def __init__(self):
-        # initialize I/O paths
+
+        # Initialize I/O paths
         self._bin = ""
-        self._binOK = False
         self._binpath = "./data/binpath.txt"
+        self._binOK = False
         self._input = "./data/specs.txt"
         self._output = "./data/specs.tsl.txt"
 
