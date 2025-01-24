@@ -18,7 +18,7 @@ either from your distribution's repositories or with pip
 > [!IMPORTANT]
 > The directory `./data/` MUST exist relative to `TSLgui.py`  
 > If this name conflicts with a project folder, you can change the paths in
-> `TSLgui.py` lines 16-18.
+> `TSLgui.py` lines 17-19.
 
 ## Usage
 

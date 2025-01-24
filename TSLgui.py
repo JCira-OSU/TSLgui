@@ -13,8 +13,8 @@ class GUI:
 
         # Initialize I/O paths
         self._bin = ""
-        self._binpath = "./data/binpath.txt"
         self._binOK = False
+        self._binpath = "./data/binpath.txt"
         self._input = "./data/specs.txt"
         self._output = "./data/specs.tsl.txt"
 
