@@ -16,7 +16,7 @@ Follow above steps, but you must also install tk/tcl. You can do this
 either from your distribution's repositories or with pip
 
 > [!IMPORTANT]
-> The directory `./data/` must exist relative to `TSLgui.py` [br]
+> The directory `./data/` MUST exist, relative to `TSLgui.py`  
 > If this name conflicts with a project folder, you can change the paths in
 > `TSLgui.py` lines 16-18.
 
