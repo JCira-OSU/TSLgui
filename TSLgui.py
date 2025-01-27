@@ -69,6 +69,8 @@ class GUI:
                 self.consoleText.see(tk.END)
                 self.binEntry.insert(0, file.read().replace("\n", ""))
                 self.set_bin(self)
+            self.consoleText.insert(tk.END, "\nFinished restoring.")
+            self.consoleText.see(tk.END)
         except FileNotFoundError:
             self.consoleText.insert(tk.END, "\nBinary path not found.")
             self.consoleText.see(tk.END)
@@ -79,6 +81,8 @@ class GUI:
                 self.consoleText.see(tk.END)
                 for line in file.readlines():
                     self.inputText.insert(tk.END, line)
+            self.consoleText.insert(tk.END, "\nFinished restoring.")
+            self.consoleText.see(tk.END)
         except FileNotFoundError:
             message = f"Welcome to TSLgui!  How to use:\n\n \
 0. !!! Make SURE ./data/ directory exists !!! \n\n \
@@ -113,8 +117,8 @@ class GUI:
                 self.outputText.delete(1.0, tk.END)
                 for line in file.readlines():
                     self.outputText.insert(tk.END, line)
-                self.consoleText.insert(tk.END, "\nFinished reading.")
-                self.consoleText.see(tk.END)
+            self.consoleText.insert(tk.END, "\nFinished reading.")
+            self.consoleText.see(tk.END)
         except FileNotFoundError:
             self.consoleText.insert(tk.END, "\nNo TSL output to restore.")
             self.consoleText.see(tk.END)
@@ -191,13 +195,14 @@ class GUI:
             self.consoleText.see(tk.END)
             return
 
-        # Write input data to file
         with open(self._input, "w") as file:
-            file.write(self.inputText.get(1.0, tk.END))
-
             # Log operations to console
             self.consoleText.insert(tk.END, f"\nWriting input file to {self._output}")
             self.consoleText.see(tk.END)
+
+            # Write input data to file
+            file.write(self.inputText.get(1.0, tk.END))
+
         self.consoleText.insert(tk.END, "\nFinished writing.")
         self.consoleText.see(tk.END)
 
@@ -221,9 +226,9 @@ class GUI:
                 for line in file.readlines():
                     self.outputText.insert(tk.END, line)
 
-                # Log operations to console
-                self.consoleText.insert(tk.END, "\nFinished reading.")
-                self.consoleText.see(tk.END)
+            # Log operations to console
+            self.consoleText.insert(tk.END, "\nFinished reading.")
+            self.consoleText.see(tk.END)
         except FileNotFoundError:
             self.consoleText.insert(tk.END, "\nTSL output not found.")
             self.consoleText.see(tk.END)
