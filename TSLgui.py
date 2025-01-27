@@ -72,7 +72,6 @@ class GUI:
         except FileNotFoundError:
             self.consoleText.insert(tk.END, "\nBinary path not found.")
             self.consoleText.see(tk.END)
-            pass
 
         try:
             with open(self._input, "r") as file:
@@ -104,7 +103,6 @@ class GUI:
             self.inputText.insert(tk.END, message)
             self.consoleText.insert(tk.END, "\nInput file not found.")
             self.consoleText.see(tk.END)
-            pass
 
         try:
             with open(self._output, "r") as file:
