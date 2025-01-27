@@ -4,16 +4,16 @@ A gui frontend for [TSLgenerator](https://github.com/alexorso/tslgenerator/).
 
 ## Installation
 
-### Windows / Mac
+### Windows
 
 Simply `git clone` and you're ready to run `TSLgui.py`. If you wish to use a
 different instance of TSLgui per-project, you can copy TSLgui.py to your
 project folder.
 
-### Linux
+### Linux / Mac
 
 Follow above steps, but you must also install tk/tcl. You can do this
-either from your distribution's repositories or with pip
+either from your distribution's repositories (on Linux), brew, or with python's pip
 
 > [!IMPORTANT]
 > The directory `./data/` MUST exist relative to `TSLgui.py`  
