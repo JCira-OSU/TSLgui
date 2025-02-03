@@ -65,24 +65,19 @@ class GUI:
         # Attempt to restore last session
         try:
             with open(self._binpath, "r") as file:
-                self.consoleText.insert(tk.END, "\nBinary path found, restoring...")
-                self.consoleText.see(tk.END)
+                self.outputToConsole("\nBinary path found, restoring...")
                 self.binEntry.insert(0, file.read().replace("\n", ""))
                 self.set_bin(self)
-            self.consoleText.insert(tk.END, "\nFinished restoring.")
-            self.consoleText.see(tk.END)
+            self.outputToConsole("\nFinished restoring.")
         except FileNotFoundError:
-            self.consoleText.insert(tk.END, "\nBinary path not found.")
-            self.consoleText.see(tk.END)
+            self.outputToConsole("\nBinary path not found.")
 
         try:
             with open(self._input, "r") as file:
-                self.consoleText.insert(tk.END, "\nInput file found, restoring...")
-                self.consoleText.see(tk.END)
+                self.outputToConsole("\nInput file found, restoring...")
                 for line in file.readlines():
                     self.inputText.insert(tk.END, line)
-            self.consoleText.insert(tk.END, "\nFinished restoring.")
-            self.consoleText.see(tk.END)
+            self.outputToConsole("\nFinished restoring.")
         except FileNotFoundError:
             message = f"Welcome to TSLgui!  How to use:\n\n \
 0. !!! Make SURE ./data/ directory exists !!! \n\n \
@@ -105,38 +100,37 @@ class GUI:
    TSLgenerator's manpage."
 
             self.inputText.insert(tk.END, message)
-            self.consoleText.insert(tk.END, "\nInput file not found.")
-            self.consoleText.see(tk.END)
+            self.outputToConsole("\nInput file not found.")
 
         try:
             with open(self._output, "r") as file:
-                self.consoleText.insert(
-                    tk.END, f"\nTSL output found at {self._output}, restoring..."
+                self.outputToConsole(
+                    f"\nTSL output found at {self._output}, restoring..."
                 )
-                self.consoleText.see(tk.END)
                 self.outputText.delete(1.0, tk.END)
                 for line in file.readlines():
                     self.outputText.insert(tk.END, line)
-            self.consoleText.insert(tk.END, "\nFinished reading.")
-            self.consoleText.see(tk.END)
+            self.outputToConsole("\nFinished reading.")
         except FileNotFoundError:
-            self.consoleText.insert(tk.END, "\nNo TSL output to restore.")
-            self.consoleText.see(tk.END)
+            self.outputToConsole("\nNo TSL output to restore.")
 
         # Start main gui
         self.root.mainloop()
+
+    def outputToConsole(self, text: str):
+        """Helper method to send text to bottom of console and scroll to see it"""
+        self.consoleText.insert(tk.END, text)
+        self.consoleText.see(tk.END)
 
     def show_manpage(self):
         """'Show Manpage' button logic"""
         # If valid binary is not set, print error and return.
         if not self._binOK:
-            self.consoleText.insert(tk.END, "\nFix binary path first!")
-            self.consoleText.see(tk.END)
+            self.outputToConsole("\nFix binary path first!")
             return
 
         # Log operations to console
-        self.consoleText.insert(tk.END, "\nOpening manpage...")
-        self.consoleText.see(tk.END)
+        self.outputToConsole("\nOpening manpage...")
 
         # Initialize window
         self.manpageWindow = tk.Toplevel(self.root)
@@ -170,11 +164,9 @@ class GUI:
 
             # save validated executable path for restoring next session
             with open(self._binpath, "w") as file:
-                self.consoleText.insert(
-                    tk.END, f"\nSaving binary path to {self._binpath}"
-                )
-                self.consoleText.see(tk.END)
+                self.outputToConsole(f"\nSaving binary path to {self._binpath}")
                 file.write(self._bin)
+            self.outputToConsole("\nBinary path saved.")
 
         # If the file does not exist or is not executable
         else:
@@ -191,33 +183,29 @@ class GUI:
         """TSLgenerator I/O logic"""
         # If valid binary is not set, print error and return.
         if not self._binOK:
-            self.consoleText.insert(tk.END, "\nFix binary path first!")
-            self.consoleText.see(tk.END)
+            self.outputToConsole("\nFix binary path first!")
             return
 
         with open(self._input, "w") as file:
             # Log operations to console
-            self.consoleText.insert(tk.END, f"\nWriting input file to {self._output}")
-            self.consoleText.see(tk.END)
+            self.outputToConsole(f"\nWriting input file to {self._output}")
 
             # Write input data to file
             file.write(self.inputText.get(1.0, tk.END))
 
-        self.consoleText.insert(tk.END, "\nFinished writing.")
-        self.consoleText.see(tk.END)
+        self.outputToConsole("\nFinished writing.")
 
         # Run TSLgenerator and log to console
         command = [self._bin, self._input, "-o", self._output]
         result = subprocess.run(command, capture_output=True, text=True)
-        self.consoleText.insert(tk.END, result.stdout)
+        self.outputToConsole(result.stdout)
 
         # Open TSLgenerator output file
         try:
             with open(self._output, "r") as file:
-                self.consoleText.insert(
-                    tk.END, f"\nTSL output found at {self._output}, reading..."
+                self.outputToConsole(
+                    f"\nTSL output found at {self._output}, reading..."
                 )
-                self.consoleText.see(tk.END)
 
                 # Remove old data from output textbox
                 self.outputText.delete(1.0, tk.END)
@@ -227,11 +215,9 @@ class GUI:
                     self.outputText.insert(tk.END, line)
 
             # Log operations to console
-            self.consoleText.insert(tk.END, "\nFinished reading.")
-            self.consoleText.see(tk.END)
+            self.outputToConsole("\nFinished reading.")
         except FileNotFoundError:
-            self.consoleText.insert(tk.END, "\nTSL output not found.")
-            self.consoleText.see(tk.END)
+            self.outputToConsole("\nTSL output not found.")
             self.outputText.insert(tk.END, "TSL output not found.\n")
             self.outputText.insert(tk.END, f"Check {self._output}\n")
 
