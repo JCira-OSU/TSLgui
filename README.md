@@ -21,7 +21,7 @@ with brew (on Mac), or with python's pip
 2. Press <Return/Enter>.
 3. If the file path is good (check spelling and executable status),
    then both 'Binary OK' and a 'Generate!' button will appear.
-4. Write your TSLgenerator specs in this left column.
+4. Write your TSLgenerator specs in the left column.
 5. Click 'Generate!'.
 6. Your specs will be written to `./data/specs.txt` before being passed to the
    specified binary from step 1. The output of TSLgenerator will then be written
