@@ -1,6 +1,6 @@
 # TSLgui
 
-A gui frontend for [TSLgenerator](https://github.com/alexorso/tslgenerator/).
+A gui frontend for [TSLgenerator](https://github.com/alexorso/tslgenerator/) written in python.
 
 ## Installation
 
@@ -33,11 +33,11 @@ with brew (on Mac), or with python's pip
 
 ## Other Features
 
-All stdout from TSLgenerator will be captured and displayed in
-the in-window console, including all errors.
-Your most recent input file, output file, and binary path will be
-remembered and restored upon relaunching `TSLgui.py`! As stated above, this
-data is kept in `./data/`
+- All stdout from TSLgenerator will be captured and displayed in
+  the in-window console, including all errors.
+- Your most recent input file, output file, and binary path will be
+  remembered and restored upon relaunching `TSLgui.py`! As stated above,
+  this data is kept in `./data/`
 
 If you wish to use a different instance of TSLgui per-project, you can copy TSLgui.py
 to your project folder.
